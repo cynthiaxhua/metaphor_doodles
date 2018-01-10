@@ -12,6 +12,8 @@ A fundamental aspect of human creativity involves mixing symbols and meanings in
 
 ## Preprocessing Images for the CNN
 
-python preprocess.py --data_dir=datasets/ --ds="data_set=[lightning.npz]"
+To apply a CNN encoder, we needed to use pixel-based data in addition to the stroke-based data provided by Google Quickdraw. We feed pixel-based image files to the CNN in the form of numpy arrays derived from a grayscale bitmap of the stroke-based image. In order to generate these files, and link them to corresponding stroke-based files, we prepro- cessed the previously used stroke-based data image by im- age. Preprocessing involved generating an .svg image from the stroke-based data, converting it to png format, reading the png file back in, and converting to grayscale bitmap to save in array format. During this conversion, we centered the png image to be square (since the doodles varied in size) and scaled them down to a 48x48 size.
+
+`python preprocess.py --data_dir=datasets/ --ds="data_set=[lightning.npz]"`
 
 
