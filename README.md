@@ -8,11 +8,13 @@ A fundamental aspect of human creativity involves mixing symbols and meanings in
 
 ## Training a Model
 
+The model needs one dataset in stroke-based format (.npz files provided by Google Quickdraw work for example) and the same dataset in reverse grayscale bitmap format (.npy files where 0's represent blank space and 1's represent filled pixels). Image i in either dataset should match exactly.
+
 `python sketch_rnn_train_cnn_tf.py --resume_training=True --log_root=checkpoint_path/lightning_sheep --data_dir=datasets/ --hparams="data_set=[lightning.npz,sheep.npz],ims_set=[lightning.npy,sheep.npy],conditional=True,num_steps=200000,kl_weight=0.0,save_every=25000"`
 
 ## Preprocessing Images for the CNN
 
-To apply a CNN encoder, we needed to use pixel-based data in addition to the stroke-based data provided by Google Quickdraw. We feed pixel-based image files to the CNN in the form of numpy arrays derived from a grayscale bitmap of the stroke-based image. In order to generate these files, and link them to corresponding stroke-based files, we prepro- cessed the previously used stroke-based data image by im- age. Preprocessing involved generating an .svg image from the stroke-based data, converting it to png format, reading the png file back in, and converting to grayscale bitmap to save in array format. During this conversion, we centered the png image to be square (since the doodles varied in size) and scaled them down to a 48x48 size.
+To apply a CNN encoder, we needed to use pixel-based data in addition to the stroke-based data provided by Google Quickdraw. We feed pixel-based image files to the CNN in the form of numpy arrays derived from a grayscale bitmap of the stroke-based image. In order to generate these files, and link them to corresponding stroke-based files, we prepro- cessed the previously used stroke-based data image by im- age. Preprocessing involved generating an .svg image from the stroke-based data, converting it to png format, reading the png file back in, and converting to reverse grayscale bitmap to save in array format. During this conversion, we centered the png image to be square (since the doodles varied in size) and scaled them down to a 48x48 size.
 
 `python preprocess.py --data_dir=datasets/ --ds="data_set=[lightning.npz]"`
 
